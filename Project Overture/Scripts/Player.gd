@@ -1,5 +1,6 @@
 extends KinematicBody
 
+export var gravity = 9.81
 export var speed = 1
 export var acceleration = 0.5
 export var max_speed = 10
@@ -30,6 +31,7 @@ func _physics_process(delta):
 		speed += acceleration
 		if speed > max_speed:
 			speed = max_speed
+	
 
 	var fwd = Vector3(global_transform.basis.z) * input.z * speed 
 	var strafe = Vector3(global_transform.basis.x) * input.x * speed 	

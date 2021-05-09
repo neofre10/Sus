@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 564, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 20, 0 )
+initial_velocity = 500.0
+initial_velocity_random = 0.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.356589, 0.689922, 1 )
+colors = PoolColorArray( 0.924928, 0.335529, 0.987305, 1, 0.529912, 0.332966, 0.741211, 1, 0.208931, 0.0205994, 0.65918, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.8
+orbit_velocity = 0.5
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 3 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+visible = false
+amount = 1000
+lifetime = 10.0
+process_material = SubResource( 1 )
+
+[node name="Particles2D2" type="Particles2D" parent="."]
+amount = 50000
+lifetime = 2.0
+process_material = SubResource( 4 )

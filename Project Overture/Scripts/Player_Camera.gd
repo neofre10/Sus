@@ -33,7 +33,7 @@ func get_input(delta):
 	
 func _process(delta):
 	get_input(delta)
-	$Inner_Gimbal.rotation.x = clamp($Inner_Gimbal.rotation.x, -1.4, 0)
+	$Inner_Gimbal.rotation.x = clamp($Inner_Gimbal.rotation.x, -3, 3)
 	pass
 # Called when the node enters the scene tree for the first time.
 func _ready():

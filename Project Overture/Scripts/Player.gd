@@ -2,6 +2,7 @@ extends KinematicBody
 
 export var gravity = 0.5
 export var speed = 1
+export var jump_height = 2000
 export var acceleration = 0.5
 export var max_speed = 10
 export var rotate_speed = PI/4
@@ -20,9 +21,10 @@ var mouse_accel = -.3
 func get_input():
 	var input = Vector3(
 		-int(Input.is_action_pressed("ui_left")) + int(Input.is_action_pressed("ui_right")),
-		0,
+		-int(Input.is_action_just_pressed("ui_jump")),
 		-int(Input.is_action_pressed("ui_up")) + int(Input.is_action_pressed("ui_down"))
 	)
+	
 	if Input.is_action_pressed("ui_q"):
 		rotate_y(deg2rad(rotate_speed * rotate_accel))
 	elif Input.is_action_pressed("ui_e"):

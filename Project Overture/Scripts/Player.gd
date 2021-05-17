@@ -1,8 +1,9 @@
 extends KinematicBody
 
-export var gravity = 0.5
+export var gravity = 5
 export var speed = 1
-export var jump_height = 2000
+export var jump_height = 20
+export var jump_height_accel = 4
 export var acceleration = 0.5
 export var max_speed = 10
 export var rotate_speed = PI/4
@@ -21,7 +22,7 @@ var mouse_accel = -.3
 func get_input():
 	var input = Vector3(
 		-int(Input.is_action_pressed("ui_left")) + int(Input.is_action_pressed("ui_right")),
-		-int(Input.is_action_just_pressed("ui_jump")),
+		+int(Input.is_action_just_pressed("ui_jump")),
 		-int(Input.is_action_pressed("ui_up")) + int(Input.is_action_pressed("ui_down"))
 	)
 	
@@ -43,18 +44,17 @@ func _physics_process(delta):
 			speed = max_speed
 	
 	falling -= Vector3(0,gravity,0)
-	move_and_slide(falling)
-	if is_on_floor():
+	if Input.is_action_just_released("ui_jump"):
 		falling = Vector3.ZERO
 
 	var fwd = Vector3(global_transform.basis.z) * input.z * speed 
-	var strafe = Vector3(global_transform.basis.x) * input.x * speed 	
+	var strafe = Vector3(global_transform.basis.x) * input.x * speed 
+	var jump = Vector3(global_transform.basis.y) * input.y * jump_height * jump_height_accel
 
 	move_and_slide(fwd)
 	move_and_slide(strafe)
+	falling = move_and_slide(falling, Vector3(0,1,0))
 	
-	print(falling)
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

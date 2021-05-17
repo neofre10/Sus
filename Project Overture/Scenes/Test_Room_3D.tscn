@@ -9,19 +9,47 @@
 
 [node name="Node" type="Node"]
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
+[node name="Meshes" type="Node" parent="."]
+
+[node name="Starting platform" type="MeshInstance" parent="Meshes"]
 transform = Transform( 10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+[node name="StaticBody" type="StaticBody" parent="Meshes/Starting platform"]
 transform = Transform( 0.1, 0, 0, 0, 10, 0, 0, 0, 0.1, 0, 0, 0 )
 
-[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Meshes/Starting platform/StaticBody"]
 transform = Transform( 10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0 )
 shape = SubResource( 2 )
 
-[node name="Spatial" parent="." instance=ExtResource( 1 )]
+[node name="Starting platform2" type="MeshInstance" parent="Meshes"]
+transform = Transform( 100, 0, 0, 0, 0.1, 0, 0, 0, 10, 90, -13, -38 )
+mesh = SubResource( 1 )
+material/0 = null
 
-[node name="Camera_Gimbal" parent="Spatial" instance=ExtResource( 2 )]
+[node name="StaticBody" type="StaticBody" parent="Meshes/Starting platform2"]
+transform = Transform( 0.1, 0, 0, 0, 10, 0, 0, 0, 0.1, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Meshes/Starting platform2/StaticBody"]
+transform = Transform( 10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="Ramp" type="MeshInstance" parent="Meshes"]
+transform = Transform( 10, 0, 0, 0, 0.0866025, 5, 0, -0.05, 8.66025, 0, -5, -18.6 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Meshes/Ramp"]
+transform = Transform( 0.1, 0, 0, 0, 10, 0, 0, 0, 0.1, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Meshes/Ramp/StaticBody"]
+transform = Transform( 10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="Player" type="Node" parent="."]
+
+[node name="Spatial" parent="Player" instance=ExtResource( 1 )]
+
+[node name="Camera_Gimbal" parent="Player/Spatial" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
